@@ -16,8 +16,8 @@ To use these configurations, you need to create symbolic links from this reposit
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/jorge-aranda/my-terminal.git ~/repos/jorge.aranda/my-terminal
-cd ~/repos/jorge.aranda/my-terminal
+git clone https://github.com/jorge-aranda/my-terminal.git ~/repos/jorge-aranda/my-terminal
+cd ~/repos/jorge-aranda/my-terminal
 ```
 
 ### 2. Create Symbolic Links
@@ -31,7 +31,7 @@ Run the following commands to link the configuration files:
 mv ~/.zshrc ~/.zshrc.bak
 
 # Create symbolic link
-ln -s ~/repos/jorge.aranda/my-terminal/.zshrc ~/.zshrc
+ln -s ~/repos/jorge-aranda/my-terminal/.zshrc ~/.zshrc
 ```
 
 #### Neovim Configuration (`init.lua`)
@@ -44,7 +44,7 @@ mkdir -p ~/.config/nvim
 mv ~/.config/nvim/init.lua ~/.config/nvim/init.lua.bak
 
 # Create symbolic link
-ln -s ~/repos/jorge.aranda/my-terminal/.config/nvim/init.lua ~/.config/nvim/init.lua
+ln -s ~/repos/jorge-aranda/my-terminal/.config/nvim/init.lua ~/.config/nvim/init.lua
 ```
 
 ## Usage

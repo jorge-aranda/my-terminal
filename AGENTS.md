@@ -16,7 +16,7 @@ All commits must follow the [Conventional Commits](https://www.conventionalcommi
 ### Project Structure
 
 The repository is intended to be cloned into:
-`~/repos/jorge.aranda/my-terminal`
+`~/repos/jorge-aranda/my-terminal`
 
 ### Environment Requirements
 
