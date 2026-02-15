@@ -10,7 +10,8 @@ When working with this repository, agents should follow these rules:
 
 All commits must follow the [Conventional Commits](https://www.conventionalcommits.org/) format with a specific scope for build-related tasks:
 
-`feat(build): <<message>>`
+*   `feat(build): <<message>>` for new features or infrastructure additions.
+*   `fix(build): <<message>>` for bug fixes or configuration corrections.
 
 ### Project Structure
 
