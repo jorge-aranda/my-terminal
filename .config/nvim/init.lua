@@ -152,3 +152,22 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank({ timeout = 200 })
   end,
 })
+
+-- File-type specific configuration for tab
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"javascript", "typescript", "json", "html", "css", "yaml", "lua"},
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.softtabstop = 2
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"python", "go", "java", "c", "cpp"},
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.softtabstop = 4
+  end,
+})
