@@ -10,6 +10,7 @@ Before setting up these configurations, ensure you have the following installed:
 *   **Oh My Zsh**: An open-source, community-driven framework for managing your Zsh configuration.
 *   **Powerlevel10k**: A theme for Zsh that emphasizes speed, flexibility, and out-of-the-box experience.
 *   **Fira Code Nerd Font**: A Nerd Font that includes icons and symbols needed for the prompt.
+*   **pyenv**: A Python version management tool.
 
 ## Installation
 
@@ -27,6 +28,14 @@ cd ~/repos/jorge-aranda/my-terminal
 Run the following commands to link the configuration files:
 
 #### Zsh Configuration (`.zshrc`)
+
+First, install **pyenv**:
+
+```bash
+brew install pyenv
+```
+
+Then, link the configuration file:
 
 ```bash
 # Backup existing .zshrc if it exists

@@ -201,5 +201,10 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:$HOME/.cache/lm-studio/bin"
 
+# PyEnv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - --no-rehash)"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
