@@ -30,7 +30,7 @@
 
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-    custom_arch             # show system architecture
+    # custom_arch           # custom CPU architecture prompt: show system architecture
     os_icon                 # os identifier
     dir                     # current directory
     vcs                     # git status
@@ -103,6 +103,7 @@
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
     per_directory_history   # Oh My Zsh per-directory-history local/global indicator
     # cpu_arch              # CPU architecture
+    custom_arch             # custom CPU architecture prompt: show system architecture
     time                    # current time
     # ip                    # ip address and bandwidth usage for a specified network interface
     # public_ip             # public IP address
