@@ -3,14 +3,18 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# Theme
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -77,13 +81,15 @@ plugins=(
   git
   zsh-autosuggestions
   zsh-syntax-highlighting
+  macos
+  colored-man-pages
+  extract
+  web-search
   you-should-use
   zsh-bat
   aws
   terraform
 )
-# Spaceships plugins
-plugins=($plugins spaceship-vi-mode spaceship-ember spaceship-gradle spaceship-architecture)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -126,8 +132,23 @@ alias lzd='lazydocker'
 alias vim='nvim'
 alias vi='nvim'
 
+# Useful Aliases
+alias c="clear"
+alias ll="ls -lah"
+
+# Git aliases
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit"
+alias gp="git push"
+alias gl="git log --oneline --graph --decorate"
+
 # Python 3
 alias python=python3
+
+# Bigger history
+export HISTSIZE=10000
+export SAVEHIST=10000
 
 # Path 
 export PATH=/opt/homebrew/bin:$PATH
@@ -157,12 +178,6 @@ export NVM_DIR="$HOME/.nvm"
 # zfunctions
 fpath=($fpath "$HOME/.zfunctions")
 
-# Enable starship
-# eval "$(starship init zsh)"
-
-# Enable spaceship
-source "/opt/homebrew/opt/spaceship/spaceship.zsh"
-
 # Enable the-fuck
 eval $(thefuck --alias)
 
@@ -178,3 +193,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:$HOME/.cache/lm-studio/bin"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

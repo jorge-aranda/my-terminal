@@ -8,6 +8,7 @@ Before setting up these configurations, ensure you have the following installed:
 
 *   **Neovim**: A hyper-extensible Vim-based text editor.
 *   **Oh My Zsh**: An open-source, community-driven framework for managing your Zsh configuration.
+*   **Powerlevel10k**: A theme for Zsh that emphasizes speed, flexibility, and out-of-the-box experience.
 
 ## Installation
 
@@ -34,6 +35,24 @@ mv ~/.zshrc ~/.zshrc.bak
 ln -s ~/repos/jorge-aranda/my-terminal/.zshrc ~/.zshrc
 ```
 
+#### Powerlevel10k Configuration (`.p10k.zsh`)
+
+First, install the Powerlevel10k theme:
+
+```bash
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+```
+
+Then, link the configuration file:
+
+```bash
+# Backup existing .p10k.zsh if it exists
+mv ~/.p10k.zsh ~/.p10k.zsh.bak
+
+# Create symbolic link
+ln -s ~/repos/jorge-aranda/my-terminal/.p10k.zsh ~/.p10k.zsh
+```
+
 #### Neovim Configuration (`init.lua`)
 
 ```bash
@@ -56,3 +75,13 @@ source ~/.zshrc
 ```
 
 For Neovim, simply run `nvim` and it will use the new `init.lua`.
+
+### Powerlevel10k Usage
+
+To customize the prompt, you can run:
+
+```bash
+p10k configure
+```
+
+Or manually edit the linked `~/.p10k.zsh` file.
