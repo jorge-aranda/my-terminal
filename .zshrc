@@ -181,6 +181,13 @@ fpath=($fpath "$HOME/.zfunctions")
 # Enable the-fuck
 eval $(thefuck --alias)
 
+# All colors
+function all_colors() {
+    for i in {0..255}; do
+      print -P "%F{$i}Color $i: Hello World%f"
+    done
+}
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
