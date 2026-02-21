@@ -30,7 +30,8 @@
 
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-    # os_icon               # os identifier
+    custom_arch             # show system architecture
+    os_icon                 # os identifier
     dir                     # current directory
     vcs                     # git status
     # prompt_char           # prompt symbol
@@ -1736,3 +1737,38 @@ typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 
 (( ${#p10k_config_opts} )) && setopt ${p10k_config_opts[@]}
 'builtin' 'unset' 'p10k_config_opts'
+
+# Custom architecture segment
+# Custom architecture with conditional colors
+function prompt_my_arch() {
+  local arch=$(uname -m)
+  if [[ "$arch" == "arm64" ]]; then
+    echo -n "%F{039}$arch%f"  # Clear Blue
+  elif [[ "$arch" == "x86_64" ]]; then
+    echo -n "%F{027}$arch%f"  # Dark Blue
+  else
+    echo -n "%F{030}$arch%f"  # Dark Cyan
+  fi
+}
+typeset -g POWERLEVEL9K_CUSTOM_ARCH="prompt_my_arch"
+
+# Auto-detect OS and set appropriate icon
+function set_os_icon() {
+  local os_icon nerd_icon emoji_icon
+
+  case "$(uname -s)" in
+    Darwin*)  nerd_icon=$'\uF179'; emoji_icon='🍎' ;;
+    Linux*)   nerd_icon=$'\uF17C'; emoji_icon='🐧' ;;
+    CYGWIN*|MINGW*|MSYS*) nerd_icon=$'\uF17A'; emoji_icon='🪟' ;;
+    *)        nerd_icon=$'\uF109'; emoji_icon='💻' ;;
+  esac
+
+  # Use Nerd Font if available, otherwise emoji
+  if [[ -n "$USE_NERD_FONT" ]] || [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then
+    echo "$nerd_icon"
+  else
+    echo "$emoji_icon"
+  fi
+}
+
+typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION="$(set_os_icon)"

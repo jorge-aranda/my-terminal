@@ -9,6 +9,7 @@ Before setting up these configurations, ensure you have the following installed:
 *   **Neovim**: A hyper-extensible Vim-based text editor.
 *   **Oh My Zsh**: An open-source, community-driven framework for managing your Zsh configuration.
 *   **Powerlevel10k**: A theme for Zsh that emphasizes speed, flexibility, and out-of-the-box experience.
+*   **Fira Code Nerd Font**: A Nerd Font that includes icons and symbols needed for the prompt.
 
 ## Installation
 
@@ -36,6 +37,14 @@ ln -s ~/repos/jorge-aranda/my-terminal/.zshrc ~/.zshrc
 ```
 
 #### Powerlevel10k Configuration (`.p10k.zsh`)
+
+First, install the **Fira Code Nerd Font**:
+
+```bash
+brew install --cask font-fira-code-nerd-font
+```
+
+After installing the font, configure your terminal emulator to use `FiraCode Nerd Font`.
 
 First, install the Powerlevel10k theme:
 
