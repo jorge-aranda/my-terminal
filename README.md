@@ -69,6 +69,9 @@ mv ~/.p10k.zsh ~/.p10k.zsh.bak
 
 # Create symbolic link
 ln -s ~/repos/jorge-aranda/my-terminal/.p10k.zsh ~/.p10k.zsh
+
+# Create symbolic link for compatibility mode (optional but recommended)
+ln -s ~/repos/jorge-aranda/my-terminal/.p10k.compatible-mode.zsh ~/.p10k.compatible-mode.zsh
 ```
 
 #### Neovim Configuration (`init.lua`)

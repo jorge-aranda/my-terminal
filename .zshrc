@@ -245,3 +245,8 @@ function check_nerd_font() {
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Load compatibility mode if Nerd Font is not available
+if [[ "$(check_nerd_font)" == "false" ]]; then
+  [[ ! -f ~/.p10k.compatible-mode.zsh ]] || source ~/.p10k.compatible-mode.zsh
+fi
