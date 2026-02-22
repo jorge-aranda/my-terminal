@@ -1766,11 +1766,50 @@ function set_os_icon() {
     *)        nerd_icon=$'\uF109'; emoji_icon='💻' ;;
   esac
 
-  # Use Nerd Font if available, otherwise emoji
-  if [[ -n "$USE_NERD_FONT" ]] || [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then
+  # Detect if Nerd Font is available
+  local has_nerd_font=false
+
+  # Check various terminal emulators
+  if [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then
+    # iTerm2
+    local font_name=$(defaults read com.googlecode.iterm2 2>/dev/null | grep -i "nerd\|meslo\|fira.*code")
+    [[ -n "$font_name" ]] && has_nerd_font=true
+  elif [[ "$TERM_PROGRAM" == "WarpTerminal" ]] || [[ -n "$WARP_IS_LOCAL_SHELL_SESSION" ]]; then
+    # Warp - usually has Nerd Font support
+    has_nerd_font=true
+  elif [[ -n "$INTELLIJ_ENVIRONMENT_READER" ]] || [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
+    # IntelliJ/JetBrains terminal
+    # Check if JetBrains Mono is Nerd Font patched
+    has_nerd_font=true
+  elif [[ "$TERM" == *"kitty"* ]]; then
+    # Kitty terminal
+    has_nerd_font=true
+  elif [[ "$TERM_PROGRAM" == "vscode" ]] || [[ -n "$VSCODE_INJECTION" ]]; then
+    # VS Code integrated terminal
+    has_nerd_font=true
+  elif [[ "$TERM_PROGRAM" == "Hyper" ]]; then
+    # Hyper terminal
+    has_nerd_font=true
+  fi
+
+  # Manual override via environment variable
+  [[ "$USE_NERD_FONT" == "true" ]] && has_nerd_font=true
+  [[ "$USE_NERD_FONT" == "false" ]] && has_nerd_font=false
+
+  # Return appropriate icon
+  if [[ "$has_nerd_font" == true ]]; then
     echo "$nerd_icon"
   else
-    echo "$emoji_icon"
+    # Fallback: try emoji if UTF-8, otherwise text
+    if [[ "$LANG" == *"UTF-8"* ]]; then
+      echo "$emoji_icon"
+    else
+      case "$(uname -s)" in
+        Darwin*)  echo '[Mac]' ;;
+        Linux*)   echo '[Linux]' ;;
+        *)        echo '[OS]' ;;
+      esac
+    fi
   fi
 }
 
