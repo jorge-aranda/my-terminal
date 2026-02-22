@@ -1745,11 +1745,11 @@ typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 function prompt_my_arch() {
   local arch=$(uname -m)
   if [[ "$arch" == "arm64" ]]; then
-    echo -n "%F{039}$arch%f"  # Clear Blue
+    echo -n "%F{039}\ue266 $arch%f"  # Clear Blue
   elif [[ "$arch" == "x86_64" ]]; then
-    echo -n "%F{027}$arch%f"  # Dark Blue
+    echo -n "%F{027}\ue266 $arch%f"  # Dark Blue
   else
-    echo -n "%F{030}$arch%f"  # Dark Cyan
+    echo -n "%F{030}\ue266 $arch%f"  # Dark Cyan
   fi
 }
 typeset -g POWERLEVEL9K_CUSTOM_ARCH="prompt_my_arch"
