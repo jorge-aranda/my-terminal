@@ -12,6 +12,8 @@ All commits must follow the [Conventional Commits](https://www.conventionalcommi
 
 *   `feat(build): <<message>>` for new features or infrastructure additions.
 *   `fix(build): <<message>>` for bug fixes or configuration corrections.
+*   `enhancement(powerlevel10k): <<message>>` for improvements to existing features.
+*   `docs(AGENTS.md): <<message>>` for documentation changes.
 
 ### Project Structure
 
@@ -22,3 +24,6 @@ The repository is intended to be cloned into:
 
 *   **Neovim**: Configuration located in `.config/nvim/init.lua`
 *   **Oh My Zsh**: Configuration located in `.zshrc`
+*   **Powerlevel10k**: Theme configuration in `.p10k.zsh`
+*   **Fira Code Nerd Font**: Required for icons and symbols.
+*   **pyenv**: Python version management, configured in `.zshrc`

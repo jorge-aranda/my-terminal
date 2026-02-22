@@ -3,14 +3,18 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# Theme
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -77,13 +81,15 @@ plugins=(
   git
   zsh-autosuggestions
   zsh-syntax-highlighting
+  macos
+  colored-man-pages
+  extract
+  web-search
   you-should-use
   zsh-bat
   aws
   terraform
 )
-# Spaceships plugins
-plugins=($plugins spaceship-vi-mode spaceship-ember spaceship-gradle spaceship-architecture)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -126,8 +132,23 @@ alias lzd='lazydocker'
 alias vim='nvim'
 alias vi='nvim'
 
+# Useful Aliases
+alias c="clear"
+alias ll="ls -lah"
+
+# Git aliases
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit"
+alias gp="git push"
+alias gl="git log --oneline --graph --decorate"
+
 # Python 3
 alias python=python3
+
+# Bigger history
+export HISTSIZE=10000
+export SAVEHIST=10000
 
 # Path 
 export PATH=/opt/homebrew/bin:$PATH
@@ -157,14 +178,15 @@ export NVM_DIR="$HOME/.nvm"
 # zfunctions
 fpath=($fpath "$HOME/.zfunctions")
 
-# Enable starship
-# eval "$(starship init zsh)"
-
-# Enable spaceship
-source "/opt/homebrew/opt/spaceship/spaceship.zsh"
-
 # Enable the-fuck
 eval $(thefuck --alias)
+
+# All colors
+function all_colors() {
+    for i in {0..255}; do
+      print -P "%F{$i}Color $i: Hello World%f"
+    done
+}
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -178,3 +200,105 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:$HOME/.cache/lm-studio/bin"
+
+# PyEnv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - --no-rehash)"
+
+# Detects whether the current session is running
+# inside a graphical terminal or a text console.
+# Returns:
+#   0 -> graphical terminal
+#   1 -> text mode
+function is_graphical_terminal() {
+#   # If connected via SSH, treat it as non-graphical
+#   if [[ -n "$SSH_CONNECTION" ]]; then
+#     return 1  # false
+#   fi
+
+  # On Linux systems:
+  # If DISPLAY or WAYLAND_DISPLAY is set,
+  # we are inside a graphical session
+  if [[ -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
+    return 0  # true
+  fi
+
+  # Get the current TTY device
+  local tty_device
+  tty_device=$(tty 2>/dev/null)
+
+  case "$TTY" in
+    # On Linux: Pseudo-terminals (pts) indicate graphical terminal emulators
+    # On macOS: /dev/ttysXXX indicates a terminal app inside the GUI
+    /dev/pts/*|/dev/ttys*)
+      return 0  # true
+      ;;
+    # Real TTYs (tty1, tty2, etc.) indicate text mode
+    /dev/tty[0-9]*)
+      return 1  # false
+      ;;
+    *)
+      return 1 # fallback: false
+      ;;
+  esac
+}
+
+# Check if Nerd Font is available
+function check_nerd_font() {
+  local has_nerd_font=false
+
+  if [[ -n "$SSH_CONNECTION" ]]; then
+      typeset -g USE_NERD_FONT="${USE_NERD_FONT:-$ON_SSH_SESSION_USE_NERD_FONT}"
+  fi
+
+  # Check various terminal emulators
+  if [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then
+    # iTerm2
+    local font_name=$(defaults read com.googlecode.iterm2 2>/dev/null | grep -i "nerd\|meslo\|fira.*code")
+    [[ -n "$font_name" ]] && has_nerd_font=true
+  elif [[ "$TERM_PROGRAM" == "WarpTerminal" ]] || [[ -n "$WARP_IS_LOCAL_SHELL_SESSION" ]]; then
+    # Warp - usually has Nerd Font support
+    has_nerd_font=true
+  elif [[ -n "$INTELLIJ_ENVIRONMENT_READER" ]] || [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
+    # IntelliJ/JetBrains terminal
+    # Check if JetBrains Mono is Nerd Font patched
+    has_nerd_font=true
+  elif [[ "$TERM" == *"kitty"* ]]; then
+    # Kitty terminal
+    has_nerd_font=true
+  elif [[ "$TERM_PROGRAM" == "vscode" ]] || [[ -n "$VSCODE_INJECTION" ]]; then
+    # VS Code integrated terminal
+    has_nerd_font=true
+  elif [[ "$TERM_PROGRAM" == "Hyper" ]]; then
+    # Hyper terminal
+    has_nerd_font=true
+  elif  [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then
+    # Apple terminal
+    has_nerd_font=false
+  fi
+
+  # Manual override via environment variable
+  [[ "$USE_NERD_FONT" == "true" ]] && has_nerd_font=true
+  [[ "$USE_NERD_FONT" == "false" ]] && has_nerd_font=false
+
+  echo "$has_nerd_font"
+}
+
+# Global environment definition
+typeset -g IS_GRAPHICAL_TERMINAL=$(is_graphical_terminal)
+typeset -g HAS_NERD_FONT=$(check_nerd_font)
+export ON_SSH_SESSION_USE_NERD_FONT=$(check_nerd_font)
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Load compatibility mode if Nerd Font is not available
+if [[ "$(check_nerd_font)" == "false" ]]; then
+  [[ ! -f ~/.p10k.compatible-mode.zsh ]] || source ~/.p10k.compatible-mode.zsh
+
+  # Load emojis if the system is compatible
+  if is_graphical_terminal; then
+    [[ ! -f ~/.p10k.enable-compatible-mode-emojis.zsh ]] || source ~/.p10k.enable-compatible-mode-emojis.zsh
+  fi
+fi
