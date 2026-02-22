@@ -1743,13 +1743,29 @@ typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 # Custom architecture segment
 # Custom architecture with conditional colors
 function prompt_my_arch() {
+  # Detect if Nerd Font is available
+  local has_nerd_font=$(check_nerd_font)
+
   local arch=$(uname -m)
+
   if [[ "$arch" == "arm64" ]]; then
-    echo -n "%F{039}\ue266 $arch%f"  # Clear Blue
+    if [[ "$has_nerd_font" == true ]]; then
+      echo -n "%F{039}\ue266 $arch%f"  #   Clear Blue
+    else
+      echo -n "%F{039}$arch%f"  # Clear Blue
+    fi
   elif [[ "$arch" == "x86_64" ]]; then
-    echo -n "%F{027}\ue266 $arch%f"  # Dark Blue
+    if [[ "$has_nerd_font" == true ]]; then
+      echo -n "%F{027}\ue266 $arch%f"  #   Dark Blue
+    else
+      echo -n "%F{027}$arch%f"  # Dark Blue
+    fi
   else
-    echo -n "%F{030}\ue266 $arch%f"  # Dark Cyan
+    if [[ "$has_nerd_font" == true ]]; then
+      echo -n "%F{030}\ue266 $arch%f"  #   Dark Cyan
+    else
+      echo -n "%F{030}$arch%f"  # Dark Cyan
+    fi
   fi
 }
 typeset -g POWERLEVEL9K_CUSTOM_ARCH="prompt_my_arch"
@@ -1766,34 +1782,7 @@ function set_os_icon() {
   esac
 
   # Detect if Nerd Font is available
-  local has_nerd_font=false
-
-  # Check various terminal emulators
-  if [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then
-    # iTerm2
-    local font_name=$(defaults read com.googlecode.iterm2 2>/dev/null | grep -i "nerd\|meslo\|fira.*code")
-    [[ -n "$font_name" ]] && has_nerd_font=true
-  elif [[ "$TERM_PROGRAM" == "WarpTerminal" ]] || [[ -n "$WARP_IS_LOCAL_SHELL_SESSION" ]]; then
-    # Warp - usually has Nerd Font support
-    has_nerd_font=true
-  elif [[ -n "$INTELLIJ_ENVIRONMENT_READER" ]] || [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
-    # IntelliJ/JetBrains terminal
-    # Check if JetBrains Mono is Nerd Font patched
-    has_nerd_font=true
-  elif [[ "$TERM" == *"kitty"* ]]; then
-    # Kitty terminal
-    has_nerd_font=true
-  elif [[ "$TERM_PROGRAM" == "vscode" ]] || [[ -n "$VSCODE_INJECTION" ]]; then
-    # VS Code integrated terminal
-    has_nerd_font=true
-  elif [[ "$TERM_PROGRAM" == "Hyper" ]]; then
-    # Hyper terminal
-    has_nerd_font=true
-  fi
-
-  # Manual override via environment variable
-  [[ "$USE_NERD_FONT" == "true" ]] && has_nerd_font=true
-  [[ "$USE_NERD_FONT" == "false" ]] && has_nerd_font=false
+  local has_nerd_font=$(check_nerd_font)
 
   # Return appropriate icon
   if [[ "$has_nerd_font" == true ]]; then

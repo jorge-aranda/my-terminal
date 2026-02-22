@@ -206,5 +206,42 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - --no-rehash)"
 
+# Check if Nerd Font is available
+function check_nerd_font() {
+  local has_nerd_font=false
+
+  # Check various terminal emulators
+  if [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then
+    # iTerm2
+    local font_name=$(defaults read com.googlecode.iterm2 2>/dev/null | grep -i "nerd\|meslo\|fira.*code")
+    [[ -n "$font_name" ]] && has_nerd_font=true
+  elif [[ "$TERM_PROGRAM" == "WarpTerminal" ]] || [[ -n "$WARP_IS_LOCAL_SHELL_SESSION" ]]; then
+    # Warp - usually has Nerd Font support
+    has_nerd_font=true
+  elif [[ -n "$INTELLIJ_ENVIRONMENT_READER" ]] || [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
+    # IntelliJ/JetBrains terminal
+    # Check if JetBrains Mono is Nerd Font patched
+    has_nerd_font=true
+  elif [[ "$TERM" == *"kitty"* ]]; then
+    # Kitty terminal
+    has_nerd_font=true
+  elif [[ "$TERM_PROGRAM" == "vscode" ]] || [[ -n "$VSCODE_INJECTION" ]]; then
+    # VS Code integrated terminal
+    has_nerd_font=true
+  elif [[ "$TERM_PROGRAM" == "Hyper" ]]; then
+    # Hyper terminal
+    has_nerd_font=true
+  elif  [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then
+    # Apple terminal
+    has_nerd_font=false
+  fi
+
+  # Manual override via environment variable
+  [[ "$USE_NERD_FONT" == "true" ]] && has_nerd_font=true
+  [[ "$USE_NERD_FONT" == "false" ]] && has_nerd_font=false
+
+  echo "$has_nerd_font"
+}
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
