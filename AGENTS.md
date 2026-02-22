@@ -13,6 +13,7 @@ All commits must follow the [Conventional Commits](https://www.conventionalcommi
 *   `feat(build): <<message>>` for new features or infrastructure additions.
 *   `fix(build): <<message>>` for bug fixes or configuration corrections.
 *   `enhancement(powerlevel10k): <<message>>` for improvements to existing features.
+*   `docs(AGENTS.md): <<message>>` for documentation changes.
 
 ### Project Structure
 
