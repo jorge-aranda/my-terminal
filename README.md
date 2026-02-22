@@ -146,3 +146,43 @@ export USE_NERD_FONT="false"
 # To force Nerd Fonts even if they are not detected
 export USE_NERD_FONT="true"
 ```
+
+### SSH Nerd Font Support
+
+To transfer the `USE_NERD_FONT` configuration from your local host to an SSH server, follow these steps:
+
+#### 1. Local Host Configuration (`~/.ssh/config`)
+
+Add `SendEnv ON_SSH_SESSION_USE_NERD_FONT` to your SSH configuration:
+
+```bash
+vim ~/.ssh/config
+```
+Add or update the `SendEnv` directive:
+
+```ssh
+Host *
+    SendEnv ON_SSH_SESSION_USE_NERD_FONT
+```
+
+Or you can specify a specific host instead of wildcard `*`:
+
+#### 2. Remote Server Configuration (`/etc/ssh/sshd_config`)
+
+On the remote server, you need to allow the server to accept this environment variable. Edit the SSH daemon configuration (requires `sudo`):
+
+```bash
+sudo vim /etc/ssh/sshd_config
+```
+
+Add or update the `AcceptEnv` directive:
+
+```ssh
+AcceptEnv LANG LC_* ON_SSH_SESSION_USE_NERD_FONT
+```
+
+Finally, restart the SSH service on the server to apply the changes:
+
+```bash
+sudo systemctl restart ssh
+```

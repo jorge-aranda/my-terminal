@@ -248,6 +248,10 @@ function is_graphical_terminal() {
 function check_nerd_font() {
   local has_nerd_font=false
 
+  if [[ -n "$SSH_CONNECTION" ]]; then
+      typeset -g USE_NERD_FONT="${USE_NERD_FONT:-$ON_SSH_SESSION_USE_NERD_FONT}"
+  fi
+
   # Check various terminal emulators
   if [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then
     # iTerm2
@@ -284,6 +288,7 @@ function check_nerd_font() {
 # Global environment definition
 typeset -g IS_GRAPHICAL_TERMINAL=$(is_graphical_terminal)
 typeset -g HAS_NERD_FONT=$(check_nerd_font)
+export ON_SSH_SESSION_USE_NERD_FONT=$(check_nerd_font)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
