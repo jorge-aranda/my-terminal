@@ -24,3 +24,6 @@ The repository is intended to be cloned into:
 
 *   **Neovim**: Configuration located in `.config/nvim/init.lua`
 *   **Oh My Zsh**: Configuration located in `.zshrc`
+*   **Powerlevel10k**: Theme configuration in `.p10k.zsh`
+*   **Fira Code Nerd Font**: Required for icons and symbols.
+*   **pyenv**: Python version management, configured in `.zshrc`
