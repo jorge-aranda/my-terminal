@@ -72,6 +72,9 @@ ln -s ~/repos/jorge-aranda/my-terminal/.p10k.zsh ~/.p10k.zsh
 
 # Create symbolic link for compatibility mode (optional but recommended)
 ln -s ~/repos/jorge-aranda/my-terminal/.p10k.compatible-mode.zsh ~/.p10k.compatible-mode.zsh
+
+# Create symbolic link for emoji-based compatibility mode (optional)
+ln -s ~/repos/jorge-aranda/my-terminal/.p10k.enable-compatible-mode-emojis.zsh ~/.p10k.enable-compatible-mode-emojis.zsh
 ```
 
 #### Neovim Configuration (`init.lua`)

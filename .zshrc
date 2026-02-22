@@ -249,4 +249,9 @@ function check_nerd_font() {
 # Load compatibility mode if Nerd Font is not available
 if [[ "$(check_nerd_font)" == "false" ]]; then
   [[ ! -f ~/.p10k.compatible-mode.zsh ]] || source ~/.p10k.compatible-mode.zsh
+
+  # Load emojis if the system is compatible
+  if [[ "$LANG" == *"UTF-8"* ]]; then
+    [[ ! -f ~/.p10k.enable-compatible-mode-emojis.zsh ]] || source ~/.p10k.enable-compatible-mode-emojis.zsh
+  fi
 fi

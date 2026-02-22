@@ -1751,18 +1751,24 @@ function prompt_my_arch() {
   if [[ "$arch" == "arm64" ]]; then
     if [[ "$has_nerd_font" == true ]]; then
       echo -n "%F{039}\ue266 $arch%f"  #   Clear Blue
+    elif [[ "$LANG" == *"UTF-8"* ]]; then
+      echo -n "%F{039}🧠 $arch%f"  # 🧠 Clear Blue
     else
       echo -n "%F{039}$arch%f"  # Clear Blue
     fi
   elif [[ "$arch" == "x86_64" ]]; then
     if [[ "$has_nerd_font" == true ]]; then
       echo -n "%F{027}\ue266 $arch%f"  #   Dark Blue
+    elif [[ "$LANG" == *"UTF-8"* ]]; then
+      echo -n "%F{027}🧠 $arch%f"  # 🧠 Dark Blue
     else
       echo -n "%F{027}$arch%f"  # Dark Blue
     fi
   else
     if [[ "$has_nerd_font" == true ]]; then
       echo -n "%F{030}\ue266 $arch%f"  #   Dark Cyan
+    elif [[ "$LANG" == *"UTF-8"* ]]; then
+      echo -n "%F{030}🧠 $arch%f"  # 🧠 Dark Cyan
     else
       echo -n "%F{030}$arch%f"  # Dark Cyan
     fi
