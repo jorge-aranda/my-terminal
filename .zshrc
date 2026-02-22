@@ -228,7 +228,7 @@ function is_graphical_terminal() {
   local tty_device
   tty_device=$(tty 2>/dev/null)
 
-  case "$tty_device" in
+  case "$TTY" in
     # On Linux: Pseudo-terminals (pts) indicate graphical terminal emulators
     # On macOS: /dev/ttysXXX indicates a terminal app inside the GUI
     /dev/pts/*|/dev/ttys*)
