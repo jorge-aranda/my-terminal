@@ -1751,7 +1751,7 @@ function prompt_my_arch() {
 
   local arch=$(uname -m)
 
-  if [[ "$arch" == "arm64" ]]; then
+  if [[ "$arch" == "arm64" || "$arch" == "aarch64" ]]; then
     if [[ "$has_nerd_font" == true ]]; then
       echo -n "%F{039}\ue266 $arch%f"  #   Clear Blue
     elif [[ "$LANG" == *"UTF-8"* ]]; then
