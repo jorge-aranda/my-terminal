@@ -281,6 +281,10 @@ function check_nerd_font() {
   echo "$has_nerd_font"
 }
 
+# Global environment definition
+typeset -g IS_GRAPHICAL_TERMINAL=$(is_graphical_terminal)
+typeset -g HAS_NERD_FONT=$(check_nerd_font)
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
