@@ -1041,7 +1041,7 @@
   # If set to false, hide node version if it's equal to "system".
   typeset -g POWERLEVEL9K_NODENV_SHOW_SYSTEM=true
   # Custom icon.
-  typeset -g POWERLEVEL9K_NODENV_VISUAL_IDENTIFIER_EXPANSION=$'\uE718'
+  typeset -g POWERLEVEL9K_NODENV_VISUAL_IDENTIFIER_EXPANSION=$'\uE718' # 
 
   ##############[ nvm: node.js version from nvm (https://github.com/nvm-sh/nvm) ]###############
   # Nvm color.
@@ -1062,7 +1062,7 @@
   # Separate environment name from Node version only with a space.
   typeset -g POWERLEVEL9K_NODEENV_{LEFT,RIGHT}_DELIMITER=
   # Custom icon.
-  typeset -g POWERLEVEL9K_NODEENV_VISUAL_IDENTIFIER_EXPANSION=$'\uE718'
+  typeset -g POWERLEVEL9K_NODEENV_VISUAL_IDENTIFIER_EXPANSION=$'\uE718' # 
 
   ##############################[ node_version: node.js version ]###############################
   # Node version color.
@@ -1070,7 +1070,7 @@
   # Show node version only when in a directory tree containing package.json.
   typeset -g POWERLEVEL9K_NODE_VERSION_PROJECT_ONLY=true
   # Custom icon.
-  typeset -g POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_EXPANSION=$'\uE718'  #
+  typeset -g POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_EXPANSION=$'\uE718' # 
 
   #######################[ go_version: go version (https://golang.org) ]########################
   # Go version color.
@@ -1078,7 +1078,7 @@
   # Show go version only when in a go project subdirectory.
   typeset -g POWERLEVEL9K_GO_VERSION_PROJECT_ONLY=true
   # Custom icon.
-  typeset -g POWERLEVEL9K_GO_VERSION_VISUAL_IDENTIFIER_EXPANSION=$'\uE626'
+  typeset -g POWERLEVEL9K_GO_VERSION_VISUAL_IDENTIFIER_EXPANSION='\uE626' # 
 
   #################[ rust_version: rustc version (https://www.rust-lang.org) ]##################
   # Rust version color.
@@ -1086,7 +1086,7 @@
   # Show rust version only when in a rust project subdirectory.
   typeset -g POWERLEVEL9K_RUST_VERSION_PROJECT_ONLY=true
   # Custom icon.
-  typeset -g POWERLEVEL9K_RUST_VERSION_VISUAL_IDENTIFIER_EXPANSION=$'\uE7A8'  #
+  typeset -g POWERLEVEL9K_RUST_VERSION_VISUAL_IDENTIFIER_EXPANSION=$'\uE7A8' # 
 
   ###############[ dotnet_version: .NET version (https://dotnet.microsoft.com) ]################
   # .NET version color.
@@ -1094,7 +1094,7 @@
   # Show .NET version only when in a .NET project subdirectory.
   typeset -g POWERLEVEL9K_DOTNET_VERSION_PROJECT_ONLY=true
   # Custom icon.
-typeset -g POWERLEVEL9K_DOTNET_VERSION_VISUAL_IDENTIFIER_EXPANSION=$'\uE77F'
+  typeset -g POWERLEVEL9K_DOTNET_VERSION_VISUAL_IDENTIFIER_EXPANSION=$'\uE77F' # 
 
   #####################[ php_version: php version (https://www.php.net/) ]######################
   # PHP version color.
@@ -1102,13 +1102,13 @@ typeset -g POWERLEVEL9K_DOTNET_VERSION_VISUAL_IDENTIFIER_EXPANSION=$'\uE77F'
   # Show PHP version only when in a PHP project subdirectory.
   typeset -g POWERLEVEL9K_PHP_VERSION_PROJECT_ONLY=true
   # Custom icon.
-  typeset -g POWERLEVEL9K_PHP_VERSION_VISUAL_IDENTIFIER_EXPANSION=$'\uE73D'
+  typeset -g POWERLEVEL9K_PHP_VERSION_VISUAL_IDENTIFIER_EXPANSION=$'\uE73D' # 
 
   ##########[ laravel_version: laravel php framework version (https://laravel.com/) ]###########
   # Laravel version color.
   typeset -g POWERLEVEL9K_LARAVEL_VERSION_FOREGROUND=161
   # Custom icon.
-  typeset -g POWERLEVEL9K_LARAVEL_VERSION_VISUAL_IDENTIFIER_EXPANSION=$'\uE73F'
+  typeset -g POWERLEVEL9K_LARAVEL_VERSION_VISUAL_IDENTIFIER_EXPANSION=$'\uE73F' # 
 
   ####################[ java_version: java version (https://www.java.com/) ]####################
   # Java version color.
@@ -1130,7 +1130,7 @@ typeset -g POWERLEVEL9K_DOTNET_VERSION_VISUAL_IDENTIFIER_EXPANSION=$'\uE77F'
   #
   # typeset -g POWERLEVEL9K_PACKAGE_CONTENT_EXPANSION='${P9K_PACKAGE_NAME//\%/%%}@${P9K_PACKAGE_VERSION//\%/%%}'
   # Custom icon.
-  typeset -g POWERLEVEL9K_PACKAGE_VISUAL_IDENTIFIER_EXPANSION=$'\uF487'  #
+  typeset -g POWERLEVEL9K_PACKAGE_VISUAL_IDENTIFIER_EXPANSION=$'\uF487' # 
 
   #############[ rbenv: ruby version from rbenv (https://github.com/rbenv/rbenv) ]##############
   # Rbenv color.
@@ -1143,7 +1143,7 @@ typeset -g POWERLEVEL9K_DOTNET_VERSION_VISUAL_IDENTIFIER_EXPANSION=$'\uE77F'
   # If set to false, hide ruby version if it's equal to "system".
   typeset -g POWERLEVEL9K_RBENV_SHOW_SYSTEM=true
   # Custom icon.
-  typeset -g POWERLEVEL9K_RBENV_VISUAL_IDENTIFIER_EXPANSION=$'\uE791'
+  typeset -g POWERLEVEL9K_RBENV_VISUAL_IDENTIFIER_EXPANSION=$'\uE791' # 
 
   #######################[ rvm: ruby version from rvm (https://rvm.io) ]########################
   # Rvm color.
@@ -1186,7 +1186,7 @@ typeset -g POWERLEVEL9K_DOTNET_VERSION_VISUAL_IDENTIFIER_EXPANSION=$'\uE77F'
   typeset -g POWERLEVEL9K_JENV_SHOW_SYSTEM=true
   # Custom icon.
   # Java version from jenv (Nerd Font icon)
-  typeset -g POWERLEVEL9K_JENV_VISUAL_IDENTIFIER_EXPANSION=$'\uE738'  #
+  typeset -g POWERLEVEL9K_JENV_VISUAL_IDENTIFIER_EXPANSION=$'\uE738' # 
 
   ###########[ plenv: perl version from plenv (https://github.com/tokuhirom/plenv) ]############
   # Perl color.
