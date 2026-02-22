@@ -1754,7 +1754,7 @@ function prompt_my_arch() {
   if [[ "$arch" == "arm64" || "$arch" == "aarch64" ]]; then
     if [[ "$has_nerd_font" == true ]]; then
       echo -n "%F{039}\ue266 $arch%f"  #   Clear Blue
-    elif [[ "$LANG" == *"UTF-8"* ]]; then
+    elif is_graphical_terminal; then
       echo -n "%F{039}🧠 $arch%f"  # 🧠 Clear Blue
     else
       echo -n "%F{039}$arch%f"  # Clear Blue
@@ -1762,7 +1762,7 @@ function prompt_my_arch() {
   elif [[ "$arch" == "x86_64" ]]; then
     if [[ "$has_nerd_font" == true ]]; then
       echo -n "%F{027}\ue266 $arch%f"  #   Dark Blue
-    elif [[ "$LANG" == *"UTF-8"* ]]; then
+    elif is_graphical_terminal; then
       echo -n "%F{027}🧠 $arch%f"  # 🧠 Dark Blue
     else
       echo -n "%F{027}$arch%f"  # Dark Blue
@@ -1770,7 +1770,7 @@ function prompt_my_arch() {
   else
     if [[ "$has_nerd_font" == true ]]; then
       echo -n "%F{030}\ue266 $arch%f"  #   Dark Cyan
-    elif [[ "$LANG" == *"UTF-8"* ]]; then
+    elif is_graphical_terminal; then
       echo -n "%F{030}🧠 $arch%f"  # 🧠 Dark Cyan
     else
       echo -n "%F{030}$arch%f"  # Dark Cyan
@@ -1797,8 +1797,8 @@ function set_os_icon() {
   if [[ "$has_nerd_font" == true ]]; then
     echo "$nerd_icon"
   else
-    # Fallback: try emoji if UTF-8, otherwise text
-    if [[ "$LANG" == *"UTF-8"* ]]; then
+    # Fallback: try emoji if graphical terminal, otherwise text
+    if is_graphical_terminal; then
       echo "$emoji_icon"
     else
       case "$(uname -s)" in

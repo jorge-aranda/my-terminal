@@ -206,6 +206,44 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - --no-rehash)"
 
+# Detects whether the current session is running
+# inside a graphical terminal or a text console.
+# Returns:
+#   0 -> graphical terminal
+#   1 -> text mode
+function is_graphical_terminal() {
+#   # If connected via SSH, treat it as non-graphical
+#   if [[ -n "$SSH_CONNECTION" ]]; then
+#     return 1  # false
+#   fi
+
+  # On Linux systems:
+  # If DISPLAY or WAYLAND_DISPLAY is set,
+  # we are inside a graphical session
+  if [[ -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
+    return 0  # true
+  fi
+
+  # Get the current TTY device
+  local tty_device
+  tty_device=$(tty 2>/dev/null)
+
+  case "$tty_device" in
+    # On Linux: Pseudo-terminals (pts) indicate graphical terminal emulators
+    # On macOS: /dev/ttysXXX indicates a terminal app inside the GUI
+    /dev/pts/*|/dev/ttys*)
+      return 0  # true
+      ;;
+    # Real TTYs (tty1, tty2, etc.) indicate text mode
+    /dev/tty[0-9]*)
+      return 1  # false
+      ;;
+    *)
+      return 1 # fallback: false
+      ;;
+  esac
+}
+
 # Check if Nerd Font is available
 function check_nerd_font() {
   local has_nerd_font=false
@@ -251,7 +289,7 @@ if [[ "$(check_nerd_font)" == "false" ]]; then
   [[ ! -f ~/.p10k.compatible-mode.zsh ]] || source ~/.p10k.compatible-mode.zsh
 
   # Load emojis if the system is compatible
-  if [[ "$LANG" == *"UTF-8"* ]]; then
+  if is_graphical_terminal; then
     [[ ! -f ~/.p10k.enable-compatible-mode-emojis.zsh ]] || source ~/.p10k.enable-compatible-mode-emojis.zsh
   fi
 fi
