@@ -45,6 +45,29 @@ mv ~/.zshrc ~/.zshrc.bak
 ln -s ~/repos/jorge-aranda/my-terminal/.zshrc ~/.zshrc
 ```
 
+#### Oh My Zsh Configuration
+
+Install required plugins:
+```bash
+ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+
+git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions \
+  "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+
+git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting \
+  "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+
+git clone --depth=1 https://github.com/MichaelAquilina/zsh-you-should-use \
+  "$ZSH_CUSTOM/plugins/you-should-use"
+
+git clone --depth=1 https://github.com/fdellwing/zsh-bat \
+  "$ZSH_CUSTOM/plugins/zsh-bat"
+```
+
+#### Other dependencies
+To avoid issues it is required tu install `thefuck` and `pyenv` but if you don't want to install 
+them you can comment the lines in the `.zshrc` file.
+
 #### Powerlevel10k Configuration (`.p10k.zsh`)
 
 First, install the **Fira Code Nerd Font**:
