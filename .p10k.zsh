@@ -1802,7 +1802,3 @@ function set_os_icon() {
 }
 
 typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION="$(set_os_icon)"
-
-# Directory visual identifier - folder icon
-# Displays a folder icon before the directory name in the prompt
-typeset -g POWERLEVEL9K_DIR_VISUAL_IDENTIFIER_EXPANSION=$'\uf07c' # 
