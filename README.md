@@ -106,3 +106,17 @@ p10k configure
 ```
 
 Or manually edit the linked `~/.p10k.zsh` file.
+
+### Compatibility without Nerd Fonts
+
+If you prefer not to install a Nerd Font or your terminal doesn't support it, the prompt will automatically detect whether to show icons or fall back to a compatibility mode using emojis or plain text.
+
+You can manually force this behavior using the `USE_NERD_FONT` environment variable in your `.zshrc`:
+
+```zsh
+# To disable Nerd Fonts and use compatibility mode
+export USE_NERD_FONT="false"
+
+# To force Nerd Fonts even if they are not detected
+export USE_NERD_FONT="true"
+```
