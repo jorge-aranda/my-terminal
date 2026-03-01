@@ -1,5 +1,9 @@
-# Q pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
+
+# Kiro CLI pre block. Keep at the top of this file.
+if [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]]; then
+  builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -304,4 +308,10 @@ if [[ "$(check_nerd_font)" == "false" ]]; then
   if is_graphical_terminal; then
     [[ ! -f ~/.p10k.enable-compatible-mode-emojis.zsh ]] || source ~/.p10k.enable-compatible-mode-emojis.zsh
   fi
+fi
+
+
+# Kiro CLI post block. Keep at the bottom of this file.
+if [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]]; then
+  builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
 fi
