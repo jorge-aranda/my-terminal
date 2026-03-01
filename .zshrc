@@ -1,5 +1,9 @@
-# Q pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
+
+# Kiro CLI pre block. Keep at the top of this file.
+if [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]]; then
+  builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -159,15 +163,23 @@ export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
 export EDITOR=nvim
 export VISUAL=nvim
 
+# Check if a command exists
+function command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
 # Change terminal architecture
-alias amd64='exec arch -x86_64 zsh'
-alias arm64='exec arch -arm64e zsh'
+if command_exists arch; then
+    alias amd64='exec arch -x86_64 zsh'
+    alias arm64='exec arch -arm64e zsh'
+fi
 
 # Brew compatible with both architectures
-if [ "$(arch)" = "arm64" ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+current_arch=$(uname -m)
+if [ "$current_arch" = "arm64" ] || [ "$current_arch" = "aarch64" ]; then
+    [ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 else
-    eval "$(/usr/local/bin/brew shellenv)"
+    [ -x /usr/local/bin/brew ] && eval "$(/usr/local/bin/brew shellenv)"
 fi
 
 # nvm script
@@ -179,7 +191,7 @@ export NVM_DIR="$HOME/.nvm"
 fpath=($fpath "$HOME/.zfunctions")
 
 # Enable the-fuck
-eval $(thefuck --alias)
+command_exists thefuck && eval $(thefuck --alias)
 
 # All colors
 function all_colors() {
@@ -196,15 +208,13 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -f "$HOME/fig-export/dotfiles/dotfile.zsh" ]] && builtin source "$HOME/fig-export/dotfiles/dotfile.zsh"
 
 # Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
-
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:$HOME/.cache/lm-studio/bin"
 
 # PyEnv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - --no-rehash)"
+command_exists pyenv && eval "$(pyenv init - --no-rehash)"
 
 # Detects whether the current session is running
 # inside a graphical terminal or a text console.
@@ -301,4 +311,10 @@ if [[ "$(check_nerd_font)" == "false" ]]; then
   if is_graphical_terminal; then
     [[ ! -f ~/.p10k.enable-compatible-mode-emojis.zsh ]] || source ~/.p10k.enable-compatible-mode-emojis.zsh
   fi
+fi
+
+
+# Kiro CLI post block. Keep at the bottom of this file.
+if [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]]; then
+  builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
 fi

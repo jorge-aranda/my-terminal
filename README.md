@@ -9,8 +9,14 @@ Before setting up these configurations, ensure you have the following installed:
 *   **Neovim**: A hyper-extensible Vim-based text editor.
 *   **Oh My Zsh**: An open-source, community-driven framework for managing your Zsh configuration.
 *   **Powerlevel10k**: A theme for Zsh that emphasizes speed, flexibility, and out-of-the-box experience.
-*   **Fira Code Nerd Font**: A Nerd Font that includes icons and symbols needed for the prompt.
-*   **pyenv**: A Python version management tool.
+*   **Fira Code Nerd Font** (Optional): A Nerd Font that includes icons and symbols needed for the prompt.
+*   **pyenv** (Optional): A Python version management tool.
+*   **kiro-cli** (Optional): A CLI tool for Kiro. (previously known as `fig` which was bought by Amazon-Q)
+*   **thefuck** (Optional): A magnificent app which corrects your previous console command.
+*   **nvm** (Optional): Node Version Manager.
+*   **SDKMAN** (Optional): A tool for managing parallel versions of multiple Software Development Kits.
+*   **LM Studio** (Optional): CLI for managing and running LLMs locally.
+*   **Pear** (Optional): A tool for building and sharing desktop applications.
 
 ## Installation
 
@@ -29,13 +35,7 @@ Run the following commands to link the configuration files:
 
 #### Zsh Configuration (`.zshrc`)
 
-First, install **pyenv**:
-
-```bash
-brew install pyenv
-```
-
-Then, link the configuration file:
+Link the configuration file:
 
 ```bash
 # Backup existing .zshrc if it exists
@@ -65,12 +65,16 @@ git clone --depth=1 https://github.com/fdellwing/zsh-bat \
 ```
 
 #### Other dependencies
-To avoid issues it is required tu install `thefuck` and `pyenv` but if you don't want to install 
-them you can comment the lines in the `.zshrc` file.
+Tools like `thefuck`, `pyenv`, `nvm`, and `SDKMAN` are fully supported but optional. The configuration will 
+automatically detect if they are installed and enable their functionality. If you choose not to install them, 
+the system will continue to work without any issues.
+
+For `kiro-cli`, it is also supported as an optional dependency. The configuration will automatically detect its
+presence via the pre and post blocks in the `.zshrc` file.
 
 #### Powerlevel10k Configuration (`.p10k.zsh`)
 
-First, install the **Fira Code Nerd Font**:
+The configuration includes automatic detection of Nerd Fonts. If you want to use them (recommended), you can install the **Fira Code Nerd Font**:
 
 ```bash
 brew install --cask font-fira-code-nerd-font
@@ -82,6 +86,9 @@ brew install --cask font-jetbrains-mono-nerd-font
 ```
 
 After installing the font, configure your terminal emulator to use `FiraCode Nerd Font` or `JetBrains Mono Nerd Font`.
+
+If you choose not to install a Nerd Font, the system will automatically fall back to a compatibility mode (see
+[Compatibility without Nerd Fonts](#compatibility-without-nerd-fonts)).
 
 First, install the Powerlevel10k theme:
 
@@ -118,6 +125,30 @@ mv ~/.config/nvim/init.lua ~/.config/nvim/init.lua.bak
 ln -s ~/repos/jorge-aranda/my-terminal/.config/nvim/init.lua ~/.config/nvim/init.lua
 ```
 
+## Features
+
+This configuration includes support for the following tools and features:
+
+*   **Shell**: Zsh with Oh My Zsh and Powerlevel10k theme.
+*   **Editor**: Neovim configured as the default editor.
+*   **Version Managers**: 
+    *   `pyenv` for Python.
+    *   `nvm` for Node.js.
+    *   `SDKMAN` for Java and other SDKs.
+*   **Terminal Utilities**:
+    *   `thefuck` for command correction.
+    *   `zsh-autosuggestions` and `zsh-syntax-highlighting`.
+    *   `bat` for better `cat` (via `zsh-bat`).
+    *   `you-should-use` for learning aliases.
+    *   `lazydocker` support via alias `lzd`.
+    *   `LM Studio` support (automatic path detection).
+    *   `Pear` support (automatic path detection).
+*   **Architecture Support**: Aliases for switching between `amd64` and `arm64` on macOS (Apple Silicon).
+*   **Cloud & Infrastructure**: Plugins for `aws`, `terraform`, and `kubectl` (in comments).
+*   **Nerd Font Support**: Automatic detection of Nerd Fonts with fallback to emoji-based or plain text compatibility modes.
+*   **SSH Integration**: Support for transferring Nerd Font configuration to remote servers via SSH.
+*   **Kiro Support**: Built-in blocks for `kiro-cli` integration.
+
 ## Usage
 
 After creating the symbolic links, restart your terminal or source the configuration:
@@ -140,7 +171,8 @@ Or manually edit the linked `~/.p10k.zsh` file.
 
 ### Compatibility without Nerd Fonts
 
-If you prefer not to install a Nerd Font or your terminal doesn't support it, the prompt will automatically detect whether to show icons or fall back to a compatibility mode using emojis or plain text.
+If you prefer not to install a Nerd Font or your terminal doesn't support it, the prompt will automatically detect
+whether to show icons or fall back to a compatibility mode using emojis or plain text.
 
 You can manually force this behavior using the `USE_NERD_FONT` environment variable in your `.zshrc`:
 
