@@ -163,17 +163,20 @@ export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
 export EDITOR=nvim
 export VISUAL=nvim
 
-# Change terminal architecture
-alias amd64='exec arch -x86_64 zsh'
-alias arm64='exec arch -arm64e zsh'
-
 # Check if a command exists
 function command_exists() {
   command -v "$1" >/dev/null 2>&1
 }
 
+# Change terminal architecture
+if command_exists arch; then
+    alias amd64='exec arch -x86_64 zsh'
+    alias arm64='exec arch -arm64e zsh'
+fi
+
 # Brew compatible with both architectures
-if [ "$(arch)" = "arm64" ]; then
+current_arch=$(uname -m)
+if [ "$current_arch" = "arm64" ] || [ "$current_arch" = "aarch64" ]; then
     [ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 else
     [ -x /usr/local/bin/brew ] && eval "$(/usr/local/bin/brew shellenv)"
