@@ -226,3 +226,39 @@ Finally, restart the SSH service on the server to apply the changes:
 ```bash
 sudo systemctl restart ssh
 ```
+
+## Custom Aliases and Functions
+
+This configuration includes several custom aliases and functions to enhance productivity.
+
+### Aliases
+
+| Alias            | Command                                | Description                                                          |
+|:-----------------|:---------------------------------------|:---------------------------------------------------------------------|
+| `zshconfig`      | `vim ~/.zshrc`                         | Edit the `.zshrc` file.                                              |
+| `ohmyzsh`        | `vim ~/.oh-my-zsh`                     | Edit the Oh My Zsh folder.                                           |
+| `vsc`            | `code`                                 | Open Visual Studio Code.                                             |
+| `refresh`        | `source ~/.zshrc`                      | Reload the Zsh configuration.                                        |
+| `sr`             | `screen -r`                            | Resume a screen session.                                             |
+| `sls`            | `screen -ls`                           | List screen sessions.                                                |
+| `vimzsh`         | `vim ~/.zshrc`                         | Edit the `.zshrc` file.                                              |
+| `lzd`            | `lazydocker`                           | Open LazyDocker.                                                     |
+| `vim` / `vi`     | `nvim`                                 | Use Neovim as the default editor.                                    |
+| `c`              | `clear`                                | Clear the terminal screen.                                           |
+| `ll`             | `ls -lah`                              | Detailed list of files (including hidden ones).                      |
+| `gs`             | `git status`                           | Git status.                                                          |
+| `ga`             | `git add`                              | Git add.                                                             |
+| `gc`             | `git commit`                           | Git commit.                                                          |
+| `gp`             | `git push`                             | Git push.                                                            |
+| `gl`             | `git log --oneline --graph --decorate` | Visual Git log.                                                      |
+| `python`         | `python3`                              | Use Python 3 by default.                                             |
+| `amd64`          | `exec arch -x86_64 zsh`                | Switch to x86_64 architecture (macOS).                               |
+| `arm64`          | `exec arch -arm64e zsh`                | Switch to ARM architecture (macOS).                                  |
+| `brew-installed` | (custom)                               | Lists Homebrew `leaves` and `casks` with native coloring in columns. |
+
+### Functions
+
+*   `all_colors`: Displays a list of all 256 terminal colors with their respective codes.
+*   `command_exists <cmd>`: Helper function to check if a command is available in the system.
+*   `is_graphical_terminal`: Detects if the current session is running in a graphical terminal or a text console.
+*   `check_nerd_font`: Detects if the current terminal has a Nerd Font configured.

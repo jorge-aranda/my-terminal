@@ -200,6 +200,9 @@ function all_colors() {
     done
 }
 
+# Brew installed (leaves and casks, colored and columns)
+alias brew-installed='echo -e "\033[1;34m==>\033[0m \033[1mFormulae (leaves)\033[0m"; brew leaves | column; echo; echo -e "\033[1;34m==>\033[0m \033[1mCasks\033[0m"; brew list --cask | column'
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
