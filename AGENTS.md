@@ -8,12 +8,21 @@ When working with this repository, agents should follow these rules:
 
 ### Commit Messages
 
-All commits must follow the [Conventional Commits](https://www.conventionalcommits.org/) format with a specific scope for build-related tasks:
+All commits must follow the [Conventional Commits](https://www.conventionalcommits.org/) format with a specific scope:
 
-*   `feat(build): <<message>>` for new features or infrastructure additions.
-*   `fix(build): <<message>>` for bug fixes or configuration corrections.
-*   `enhancement(powerlevel10k): <<message>>` for improvements to existing features.
-*   `docs(AGENTS.md): <<message>>` for documentation changes.
+*   `feat(<scope>): <<message>>` for new features or infrastructure additions.
+*   `fix(<scope>): <<message>>` for bug fixes or configuration corrections.
+*   `enhancement(<scope>): <<message>>` for improvements to existing features.
+*   `docs(<scope>): <<message>>` for documentation changes.
+*   `refactor(<scope>): <<message>>` for code restructuring without changing functionality.
+*   `chore(<scope>): <<message>>` for maintenance tasks (dependency updates, cleanup, etc.).
+*   `style(<scope>): <<message>>` for formatting changes that don't affect code meaning.
+*   `test(<scope>): <<message>>` for adding or updating tests.
+*   `ci(<scope>): <<message>>` for CI/CD pipeline changes.
+*   `perf(<scope>): <<message>>` for performance improvements.
+*   `revert(<scope>): <<message>>` for reverting a previous commit.
+
+Common scopes include: `build`, `zsh`, `nvim`, `powerlevel10k`, `AGENTS.md`, `README.md`.
 
 ### Project Structure
 
