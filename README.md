@@ -20,16 +20,71 @@ Before setting up these configurations, ensure you have the following installed:
 
 ## Installation
 
-To use these configurations, you need to create symbolic links from this repository to your home directory or the appropriate configuration folders.
+### Quick Install (Recommended)
 
-### 1. Clone the repository
+Clone the repository and run the installer:
+
+```bash
+git clone https://github.com/jorge-aranda/my-terminal.git ~/repos/jorge-aranda/my-terminal
+cd ~/repos/jorge-aranda/my-terminal
+./install.sh
+```
+
+The installer will:
+- Detect your language (English/Spanish) automatically.
+- Check and optionally install mandatory prerequisites (on macOS via Homebrew).
+- Offer to install Nerd Fonts (Fira Code and/or JetBrains Mono).
+- Show a summary of changes before proceeding.
+- Create all symbolic links and install plugins/themes.
+- Optionally configure Neovim and SSH Nerd Font support.
+- Skip already-completed steps (idempotent).
+
+#### Unattended Mode
+
+For automated/CI environments:
+
+```bash
+# Unattended install (fails if mandatory prerequisites are missing)
+./install.sh --unattended
+
+# Unattended install + install mandatory prerequisites (macOS only)
+./install.sh --unattended --deps
+```
+
+In unattended mode, the installer will:
+1. Install mandatory dependencies only if `--deps` is passed (macOS). Otherwise, fail if missing.
+2. Skip optional dependencies (Neovim, fonts).
+3. Configure all symbolic links, plugins, and themes (including Neovim).
+4. Skip Nerd Font and SSH configuration (informing the user).
+
+### Uninstall
+
+To remove the configuration:
+
+```bash
+cd ~/repos/jorge-aranda/my-terminal
+./uninstall.sh
+```
+
+The uninstaller will interactively remove symlinks (restoring backups), plugins, themes, and SSH config entries. On macOS, it can also uninstall dependencies (fonts, Neovim) via Homebrew.
+
+```bash
+# Remove everything including dependencies
+./uninstall.sh --all
+```
+
+### Manual Installation
+
+If you prefer to install manually, follow the steps below.
+
+#### 1. Clone the repository
 
 ```bash
 git clone https://github.com/jorge-aranda/my-terminal.git ~/repos/jorge-aranda/my-terminal
 cd ~/repos/jorge-aranda/my-terminal
 ```
 
-### 2. Create Symbolic Links
+#### 2. Create Symbolic Links
 
 Run the following commands to link the configuration files:
 
